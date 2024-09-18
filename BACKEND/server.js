@@ -1,17 +1,28 @@
 
-const express = require('express');
-const dotenv = require('dotenv').config();
-const mongoose = require('mongoose');
-const cors = require('cors');
-const bodyparser = require('body-parser');
+const express = require('express')
+
+const dotenv = require('dotenv').config()
+const mongoose = require('mongoose')
+const cors = require('cors')
+const bodyparser = require('body-parser')
 
 
-const  app  =  express();
+const  app  =  express()
 
+app.use( express.json());
+app.use( express.urlencoded({extended: false}))
+app.use(bodyparser.json())
 //conn  to  mongo  db
+
+
+const userRoute = require('./routes/userRoute');
+
 
 const  PORT  =  process.env.PORT ||  8000
 
+//route  middle  ware
+
+app.use("/api/users" , userRoute)
 
 
 //routes
